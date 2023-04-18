@@ -1,0 +1,167 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+
+$grey_0: #333333;
+$blue_0: #0051a4;
+$white_0: #ffffff;
+
+@mixin Inter_regular {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+}
+@mixin Inter_medium {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+}
+@mixin Inter_semibold {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+}
+
+.App {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav {
+    height: 3.5rem;
+    width: 100%;
+    box-shadow: 0px 3.5px 4px -1px rgba(0, 0, 0, 0.093);
+    position: fixed;
+    background-color: $white_0;
+    z-index: 1;
+
+    .navButton {
+        width: 75px;
+        height: 29px;
+        background-color: $grey_0;
+        border-radius: 2px;
+        color: $white_0;
+        font-size: 0.6rem;
+
+        &:hover {
+          background-color: #292929
+        }
+      }
+
+    }
+
+    .navItems {
+      @include Inter_regular();
+      font-size: 1.2rem;
+      position: fixed;
+      top: 3rem;
+      background-color: $white_0;
+
+      .navTopics {
+        &:hover {
+            text-decoration: underline;
+            cursor: pointer;
+            color: $blue_0;
+        }
+      }
+    }
+  
+  
+  .material-symbols-outlined {
+    color: $grey_0;
+  }
+
+
+  hr {
+    background-color: $grey_0;
+    height: 0.8px;
+    width: 92vw;
+  }
+  
+  .home {
+    height: 80vh;
+    width: auto;
+    text-align: center;
+
+    .bannerText {
+        @include Inter_regular();
+
+        .bannerLink {
+            color: $blue_0;
+            text-decoration: underline;
+            &:hover {
+                color: $grey_0;
+            }
+          }
+    }
+  }
+
+  .articleCard  {
+
+    .articleTitle {
+        font-size: 1.5rem;
+        @include Inter_regular();
+        &:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
+
+    .description {
+        font-size: 1.2rem;
+    }
+
+    .topic {
+        font-style: italic;
+        color: $blue_0;
+    }
+
+
+    .author {
+      font-weight: 600;
+    }  
+}
+
+.articleSingle {
+  
+  .articleTitle {
+    font-size: 1.5rem;
+    @include Inter_regular();
+  }
+
+  .description {
+    font-size: 1.2rem;
+}
+
+.topic {
+    font-style: italic;
+    color: $blue_0;
+}
+
+
+.author {
+  font-weight: 600;
+}  
+
+.material-symbols-outlined {
+  &:hover {
+    color: $blue_0;
+    cursor: pointer;
+  }
+}
+}
+
+.builtby {
+    a {
+      color: $blue_0;
+      text-decoration: underline;
+
+      &:hover {
+        color: $grey_0;
+      }
+    }
+}
+
+.loading {
+  font-size: 100px;
+}
