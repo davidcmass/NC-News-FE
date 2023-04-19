@@ -1,23 +1,43 @@
 import axios from "axios";
 
-const baseUrl = "https://nc-news-gxdx.onrender.com/api";
+const articleApi = axios.create({
+  baseURL: "https://nc-news-gxdx.onrender.com/api",
+});
 
 const fetchArticles = () => {
-  return axios.get(`${baseUrl}/Articles`).then(({ data }) => {
+  return articleApi.get("/Articles").then(({ data }) => {
     return data.article;
   });
 };
 
 const fetchTopics = () => {
-  return axios.get(`${baseUrl}/Topics`).then(({ data }) => {
+  return articleApi.get("/Topics").then(({ data }) => {
     return data.topics;
   });
 };
 
 const fetchArticleById = (article_id) => {
-  return axios.get(`${baseUrl}/Articles/${article_id}`).then(({ data }) => {
+  return articleApi.get(`/Articles/${article_id}`).then(({ data }) => {
     return data.article;
   });
 };
 
-export { fetchArticles, fetchTopics, fetchArticleById };
+const fetchUser = () => {
+  return articleApi.get("/Users").then(({ data }) => {
+    return data.users;
+  });
+};
+
+const fetchComments = (article_id) => {
+  return articleApi.get(`/Articles/${article_id}/Comments`).then(({ data }) => {
+    return data.comments;
+  });
+};
+
+export {
+  fetchArticles,
+  fetchTopics,
+  fetchArticleById,
+  fetchUser,
+  fetchComments,
+};

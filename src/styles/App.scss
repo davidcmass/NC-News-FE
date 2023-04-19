@@ -165,3 +165,21 @@ $white_0: #ffffff;
 .loading {
   font-size: 100px;
 }
+
+input[type="text"] {
+  @include Inter_regular();
+}
+
+.comments {
+  @include Inter_medium();
+}
+
+.commentNum {
+  @include Inter_medium();
+}
+
+.upArrow {
+  &:hover {
+    color: $blue_0;
+  }
+}
