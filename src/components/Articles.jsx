@@ -31,24 +31,25 @@ const Articles = ({ setIsLoading, scrollUp }) => {
       <p className='topic'>{articleId.topic}</p>
       <h2 className="articleTitle">{articleId.title}</h2>
       <p className='author pb-2'>By {articleId.author}</p>
+
+      <a href="/"> <span className="material-symbols-outlined">
+        arrow_back
+      </span> </a>
       
       <img className='pb-2' src={articleId.article_img_url} alt="" />
       <p className='description'>{articleId.body}</p>
 
 
       <div className='p-5 flex gap-10'>
-      <a href="/"> <span className="material-symbols-outlined">
-        arrow_back
-      </span> </a>
       <div className="flex gap-1">
       <span className="material-symbols-outlined" onClick={() => setCommentClick(!commentClick)}>
-  comment
+      comment
       </span>
       <p className="commentNum">{commentsId.length}</p>
       </div>
-      <button onClick={() => setClick(!click)}>{ click ? <span className="material-symbols-outlined"> favorite
-        </span> : <span className="material-symbols-outlined"> heart_plus
-        </span> }</button>
+      <button onClick={() => setClick(!click)}>{ click ? <div className="flex gap-1 pb-1"><span className="material-symbols-outlined"> favorite
+        </span> <p className="votes">{articleId.votes}</p></div> : <div className="flex gap-1"> <span className="material-symbols-outlined"> heart_plus
+        </span> <p className="votes">{articleId.votes}</p></div> }</button>
       </div>
 
      { commentClick ? '' : <div>
