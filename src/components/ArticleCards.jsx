@@ -13,7 +13,7 @@ const ArticleCards = ({ setIsLoading }) => {
     }, [])
 
   
-    return <>
+    return <div className="articleContaoner">
     {
     articles.map((article) => {
       const aBody = article.body.substring(0, 120) + '...'
@@ -29,7 +29,7 @@ const ArticleCards = ({ setIsLoading }) => {
       }
     })
     }
-   </>
+   </div>
   }
 
   export default ArticleCards

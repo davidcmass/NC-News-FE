@@ -29,12 +29,24 @@ const Nav = ({ click, setClick, userNames}) => {
             setAuth('')
             setLogSuccess(false)
     }
+
+    const [isDesktop, setIsDesktop] = useState(true);
+
+    useEffect(() => {
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 1000) setIsDesktop(window.innerWidth > 1000);
+        }, false);
+    }, []);
  
 
     return <div className="nav flex justify-between items-center pr-6 pl-6">
-        <button onClick={() => setClick(!click)}>{ click ? <span className="material-symbols-outlined"> menu
+       { isDesktop ? <div>
+        <ul>
+            <li>Home</li>
+        </ul>
+       </div> : <button onClick={() => setClick(!click)}>{ click ? <span className="material-symbols-outlined"> menu
         </span> : <span className="material-symbols-outlined"> close
-        </span> }</button>
+        </span> }</button> }
          <a href="/" className='navLogo'><img src={navLogo} alt="Logo" /></a>
 
          { logSuccess ? <div className='flex justify-center items-center gap-5 border-b border-black logInSuccess'><h3>{auth}</h3> <button type='button' className="navButton" onClick={handleLogOut}>Log out</button></div> : <form className='flex justify-center border-b border-black username' onSubmit={handleSubmit}>

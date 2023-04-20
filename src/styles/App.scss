@@ -215,3 +215,16 @@ input:focus {
 .logInSuccess {
   padding-bottom: 0.28rem;
 }
+
+@media (min-width: 1000px) {
+ 
+  .articleContaoner {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .articleCard {
+    flex: 1 0 30%;
+  }
+}
