@@ -39,6 +39,8 @@ const Articles = ({ setIsLoading, scrollUp, userNames}) => {
 
       const [username, setUsername] = useState('');
       const [body, setBody] = useState('');
+      const [error, setError] = useState(false)
+      const [success, setSuccess] = useState(false)
 
       const handleSubmit = (event) => {
         event.preventDefault()
@@ -56,8 +58,14 @@ const Articles = ({ setIsLoading, scrollUp, userNames}) => {
         })
         setUsername('')
         setBody('')
-        console.log("Sucessful")
-        } else console.log('Error')
+        setSuccess(true)
+        setTimeout(() => {
+          setSuccess(false)
+        }, 2500);
+        } else setError(true)
+        setTimeout(() => {
+          setError(false)
+        }, 2500);
       }
   
     return <div className="flex flex-col items-center p-5 pt-24 text-center gap-2 articleSingle">
@@ -94,7 +102,10 @@ const Articles = ({ setIsLoading, scrollUp, userNames}) => {
           <input value={body} type="text" className='commentText border-b border-black' placeholder="Comment on this article" onChange={(event) => {setBody(event.target.value)}} required/>
           <button className="button" onClick={handleSubmit}>Submit</button>
         </form>
-        
+        { error ? <h3 className=" text-red-600">Invalid input!</h3> : "" } { success ? <h3 className=" text-green-600">Comment posted!</h3> : "" }
+
+        { commentsId.length === 0 ? <h3>Nothing to see here...</h3> : ''}
+
         {commentsId.map((comments) => {
           return <div key={comments.comment_id} className="p-4 flex flex-col items-center gap-4 comments"> 
           <hr />
