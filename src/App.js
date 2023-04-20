@@ -27,7 +27,7 @@ function App() {
 
   return (
     <div className="App">
-      <Nav click={click} setClick={setClick} />
+      <Nav click={click} setClick={setClick} userNames={userNames} />
       {click ? "" : <NavMenu />}
       <Routes>
         <Route path="/" element={<Home scrollUp={scrollUp} />} />
@@ -37,11 +37,7 @@ function App() {
             isLoading ? (
               <div className="loading">Loading...</div>
             ) : (
-              <Articles
-                setIsLoading={setIsLoading}
-                scrollUp={scrollUp}
-                userNames={userNames}
-              />
+              <Articles setIsLoading={setIsLoading} scrollUp={scrollUp} />
             )
           }
         />

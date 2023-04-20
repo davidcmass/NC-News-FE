@@ -4,6 +4,7 @@ import ArticleCards from './ArticleCards'
 import { useState } from "react"; 
 
 const Home = ({ scrollUp }) => {
+
     const [isLoading, setIsLoading] = useState(false);
       const topics = ['Coding', 'Football', 'Cooking']
 
