@@ -34,10 +34,28 @@ const fetchComments = (article_id) => {
   });
 };
 
+const articleVote = (article_id, voteNum) => {
+  return articleApi
+    .patch(`/Articles/${article_id}`, { inc_votes: voteNum })
+    .then(({ data }) => {
+      return data.article;
+    });
+};
+
+const commentPost = (article_id, commentObj) => {
+  return articleApi
+    .post(`/Articles/${article_id}/Comments`, commentObj)
+    .then(({ data }) => {
+      return data.comment;
+    });
+};
+
 export {
   fetchArticles,
   fetchTopics,
   fetchArticleById,
   fetchUser,
   fetchComments,
+  articleVote,
+  commentPost,
 };

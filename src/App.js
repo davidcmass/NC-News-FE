@@ -4,11 +4,22 @@ import Nav from "./components/Nav";
 import NavMenu from "./components/NavMenu";
 import Home from "./components/Home";
 import Articles from "./components/Articles";
-import { useState } from "react";
+import { fetchUser } from "./Api";
+import { useState, useEffect } from "react";
 
 function App() {
   const [click, setClick] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [user, setUser] = useState([]);
+  useEffect(() => {
+    fetchUser().then((user) => {
+      setUser(user);
+    });
+  }, []);
+
+  const userNames = user.map((user) => {
+    return user.username;
+  });
 
   const scrollUp = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -26,7 +37,11 @@ function App() {
             isLoading ? (
               <div className="loading">Loading...</div>
             ) : (
-              <Articles setIsLoading={setIsLoading} scrollUp={scrollUp} />
+              <Articles
+                setIsLoading={setIsLoading}
+                scrollUp={scrollUp}
+                userNames={userNames}
+              />
             )
           }
         />

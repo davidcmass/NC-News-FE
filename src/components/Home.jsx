@@ -19,7 +19,7 @@ const Home = ({ scrollUp }) => {
         <hr />
           { isLoading ? <div className='loading'>Loading...</div> : <ArticleCards setIsLoading={setIsLoading}/> }
 
-         <button><span class="material-symbols-outlined p-2 upArrow" onClick={scrollUp}>
+         <button><span className="material-symbols-outlined p-2 upArrow" onClick={scrollUp}>
         arrow_upward
         </span></button> 
 

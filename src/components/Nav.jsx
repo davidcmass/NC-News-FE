@@ -3,17 +3,6 @@ import { useEffect, useState } from "react";
 import { fetchUser } from '../Api'
 
 const Nav = ({ click, setClick }) => {
-    const [user, setUser] = useState([])
-      useEffect(() => {
-        fetchUser()
-        .then((user) => {
-          setUser(user)
-      })
-    }, [])
-   
-    const userNames = user.map((user) => {
-        return user.username
-    })
 
     const handleSubmit = (event) => {
         event.preventDefault()
