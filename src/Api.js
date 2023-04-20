@@ -50,6 +50,10 @@ const commentPost = (article_id, commentObj) => {
     });
 };
 
+const deleteComment = (comment_id) => {
+  return articleApi.delete(`/comments/${comment_id}`);
+};
+
 export {
   fetchArticles,
   fetchTopics,
@@ -58,4 +62,5 @@ export {
   fetchComments,
   articleVote,
   commentPost,
+  deleteComment,
 };

@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import Footer from './Footer'
-import { fetchArticleById, fetchComments, articleVote, commentPost } from '../Api'
+import { fetchArticleById, fetchComments, articleVote, commentPost, deleteComment} from '../Api'
 import AuthContext from "../contexts/AuthProvider"
 
 const Articles = ({ setIsLoading, scrollUp }) => {
@@ -85,7 +85,7 @@ const Articles = ({ setIsLoading, scrollUp }) => {
       const handleSubmit = (event) => {
         event.preventDefault()
         
-        if (logSuccess) {
+        if (logSuccess && body.length >= 1) {
         commentPost(article_id, {
           username: auth,
           body: body
@@ -114,7 +114,22 @@ const Articles = ({ setIsLoading, scrollUp }) => {
           setError(false)
         }, 2500);
       }
-  
+
+      const [successDelete, setSuccessDelete] = useState(false)
+
+      const handleDelete = (e) => {
+        
+        deleteComment(e.target.value)
+        .then(() => {
+          setSuccessDelete(true)
+        })
+        .catch((err) => {
+         if (err) {
+          console.log(err)
+         }
+        })
+      }
+
     return <div className="flex flex-col items-center p-5 pt-24 text-center gap-2 articleSingle">
       <p className='topic'>{articleId.topic}</p>
       <h2 className="articleTitle">{articleId.title}</h2>
@@ -146,7 +161,7 @@ const Articles = ({ setIsLoading, scrollUp }) => {
      { commentClick ? '' : <div className="flex flex-col items-center">
      <hr />
         <form className='addComment flex m-8 text-center gap-10 pt-4  p-1 border-b border-black'>
-          <input value={body} type="text" className='commentText' placeholder="Comment on this article" onChange={(event) => {setBody(event.target.value)}} autoComplete='off' required/>
+          <input required value={body} type="text" className='commentText' placeholder="Comment on this article" onChange={(event) => {setBody(event.target.value)}} autoComplete='off'/>
           <button className="button" onClick={handleSubmit}>Submit</button>
         </form>
         { error || commentErr ? <h3 className=" text-red-600">Error! Please try again</h3> : ""} 
@@ -165,7 +180,8 @@ const Articles = ({ setIsLoading, scrollUp }) => {
           </span>
           <p className="votes">{comments.votes}</p>
           </div>
-            </div>
+          { auth === comments.author ?  <button value={comments.comment_id} onClick={handleDelete} className="button">Delete</button> : '' } 
+          </div>
         })}
         <button><span className="material-symbols-outlined p-2 upArrow" onClick={scrollUp}>
         arrow_upward
