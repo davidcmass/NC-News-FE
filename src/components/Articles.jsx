@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Footer from './Footer'
-import { fetchArticleById, fetchComments } from '../Api'
+import { fetchArticleById, fetchComments, articleVote, commentPost } from '../Api'
 
-const Articles = ({ setIsLoading, scrollUp }) => {
+const Articles = ({ setIsLoading, scrollUp, userNames}) => {
     const [click, setClick] = useState(true)
     const [commentClick, setCommentClick] = useState(true)
     const [articleId, setArticleId] = useState({})
     const { article_id } = useParams()
+
     useEffect (() => {
       setIsLoading(true)
       fetchArticleById(article_id)
@@ -16,6 +17,15 @@ const Articles = ({ setIsLoading, scrollUp }) => {
       })
       setIsLoading(false)
     }, [article_id])
+
+    const handleVote = () => {
+      setClick(!click)
+      articleVote(article_id, 1)
+
+      // Optimistic Rendering
+      articleId.votes++
+    }
+   
 
     //comments 
       const [commentsId, setCommentsId] = useState([])
@@ -26,6 +36,29 @@ const Articles = ({ setIsLoading, scrollUp }) => {
         })
       }, [article_id])
       //
+
+      const [username, setUsername] = useState('');
+      const [body, setBody] = useState('');
+
+      const handleSubmit = (event) => {
+        event.preventDefault()
+        
+        if (userNames.includes(username)) {
+        commentPost(article_id, {
+          username: username,
+          body: body
+          
+        }).then((comment) => {
+          setCommentsId((commentsId) => {
+            const commentsArr = [comment[0], ...commentsId]
+            return commentsArr
+          })
+        })
+        setUsername('')
+        setBody('')
+        console.log("Sucessful")
+        } else console.log('Error')
+      }
   
     return <div className="flex flex-col items-center p-5 pt-24 text-center gap-2 articleSingle">
       <p className='topic'>{articleId.topic}</p>
@@ -42,31 +75,40 @@ const Articles = ({ setIsLoading, scrollUp }) => {
 
       <div className='p-5 flex gap-10'>
       <div className="flex gap-1">
-      <span className="material-symbols-outlined" onClick={() => setCommentClick(!commentClick)}>
+      <button onClick={() => setCommentClick(!commentClick)} > { commentClick ? <span className="material-symbols-outlined">
       comment
-      </span>
+      </span> : <span className="material-symbols-outlined">
+    add_comment
+</span> } </button>
       <p className="commentNum">{commentsId.length}</p>
       </div>
-      <button onClick={() => setClick(!click)}>{ click ? <div className="flex gap-1 pb-1"><span className="material-symbols-outlined"> favorite
+      <button onClick={handleVote}>{ click ? <div className="flex gap-1 pb-1"><span className="material-symbols-outlined"> favorite
         </span> <p className="votes">{articleId.votes}</p></div> : <div className="flex gap-1"> <span className="material-symbols-outlined"> heart_plus
         </span> <p className="votes">{articleId.votes}</p></div> }</button>
       </div>
-
-     { commentClick ? '' : <div>
+     
+     { commentClick ? '' : <div className="flex flex-col items-center">
+     <hr />
+        <form className='addComment flex m-8 text-center gap-10 pt-4  p-1'>
+        <input value={username} type="text" className='userNameInput border-b border-black' autoFocus="autoFocus" placeholder="Username" onChange={(event) => {setUsername(event.target.value)}} required/>
+          <input value={body} type="text" className='commentText border-b border-black' placeholder="Comment on this article" onChange={(event) => {setBody(event.target.value)}} required/>
+          <button className="button" onClick={handleSubmit}>Submit</button>
+        </form>
+        
         {commentsId.map((comments) => {
           return <div key={comments.comment_id} className="p-4 flex flex-col items-center gap-4 comments"> 
           <hr />
             <h3>{comments.body}</h3>
             <p className="author">{comments.author}</p>
             <div className="flex gap-1">
-            <span class="material-symbols-outlined">
+            <span className="material-symbols-outlined">
           thumb_up
           </span>
           <p className="votes">{comments.votes}</p>
           </div>
             </div>
         })}
-        <button><span class="material-symbols-outlined p-2 upArrow" onClick={scrollUp}>
+        <button><span className="material-symbols-outlined p-2 upArrow" onClick={scrollUp}>
         arrow_upward
         </span></button>
       </div> }
