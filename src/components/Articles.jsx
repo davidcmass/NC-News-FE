@@ -8,6 +8,7 @@ const Articles = ({ setIsLoading, scrollUp, userNames}) => {
     const [commentClick, setCommentClick] = useState(true)
     const [articleId, setArticleId] = useState({})
     const { article_id } = useParams()
+    const [err, setErr] = useState(false)
 
     useEffect (() => {
       setIsLoading(true)
@@ -21,6 +22,14 @@ const Articles = ({ setIsLoading, scrollUp, userNames}) => {
     const handleVote = () => {
       setClick(!click)
       articleVote(article_id, 1)
+      .catch((err) => {
+        if(err) {
+        setErr(true)
+        setTimeout(() => {
+          setErr(false)
+        }, 2500);
+        }
+      })
 
       // Optimistic Rendering
       articleId.votes++
@@ -41,6 +50,8 @@ const Articles = ({ setIsLoading, scrollUp, userNames}) => {
       const [body, setBody] = useState('');
       const [error, setError] = useState(false)
       const [success, setSuccess] = useState(false)
+      const [commentErr, setCommentErr] = useState(false)
+     
 
       const handleSubmit = (event) => {
         event.preventDefault()
@@ -55,6 +66,13 @@ const Articles = ({ setIsLoading, scrollUp, userNames}) => {
             const commentsArr = [comment[0], ...commentsId]
             return commentsArr
           })
+        }).catch((err) => {
+          if (err) {
+          setCommentErr(true)
+          setTimeout(() => {
+            setCommentErr(false)
+          }, 2500);
+          }
         })
         setUsername('')
         setBody('')
@@ -92,8 +110,9 @@ const Articles = ({ setIsLoading, scrollUp, userNames}) => {
       </div>
       <button onClick={handleVote}>{ click ? <div className="flex gap-1 pb-1"><span className="material-symbols-outlined"> favorite
         </span> <p className="votes">{articleId.votes}</p></div> : <div className="flex gap-1"> <span className="material-symbols-outlined"> heart_plus
-        </span> <p className="votes">{articleId.votes}</p></div> }</button>
+        </span> <p className="votes">{articleId.votes}</p></div> }</button> 
       </div>
+      { err ? <h3 className="text-red-600">Error! Please try again</h3> : "" }
      
      { commentClick ? '' : <div className="flex flex-col items-center">
      <hr />
@@ -102,7 +121,8 @@ const Articles = ({ setIsLoading, scrollUp, userNames}) => {
           <input value={body} type="text" className='commentText border-b border-black' placeholder="Comment on this article" onChange={(event) => {setBody(event.target.value)}} required/>
           <button className="button" onClick={handleSubmit}>Submit</button>
         </form>
-        { error ? <h3 className=" text-red-600">Invalid input!</h3> : "" } { success ? <h3 className=" text-green-600">Comment posted!</h3> : "" }
+        { error || commentErr ? <h3 className=" text-red-600">Error! Please try again</h3> : ""} 
+        { !commentErr && success ? <h3 className=" text-green-600">Comment posted!</h3> : "" }
 
         { commentsId.length === 0 ? <h3>Nothing to see here...</h3> : ''}
 
