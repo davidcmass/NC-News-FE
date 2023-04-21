@@ -37,6 +37,7 @@
   position: fixed;
   top: 3rem;
   background-color: #ffffff;
+  width: 100%;
 }
 .navItems .navTopics:hover {
   text-decoration: underline;
@@ -66,9 +67,6 @@ hr {
 .home .bannerText .bannerLink {
   color: #0051a4;
   text-decoration: underline;
-}
-.home .bannerText .bannerLink:hover {
-  color: #333333;
 }
 
 .articleCard .articleTitle {
@@ -165,4 +163,19 @@ input:focus {
 
 .username {
   padding-bottom: 0.05rem;
+}
+
+.logInSuccess {
+  padding-bottom: 0.28rem;
+}
+
+@media (min-width: 1000px) {
+  .articleContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .articleCard {
+    flex: 1 0 30%;
+  }
 }/*# sourceMappingURL=App.css.map */
