@@ -30,7 +30,15 @@ function App() {
   return (
     <div className="App">
       <Nav click={click} setClick={setClick} userNames={userNames} />
-      {click ? "" : <NavMenu setNewTopic={setNewTopic} newTopic={newTopic} />}
+      {click ? (
+        ""
+      ) : (
+        <NavMenu
+          setNewTopic={setNewTopic}
+          newTopic={newTopic}
+          setClick={setClick}
+        />
+      )}
       <Routes>
         <Route
           path="/"

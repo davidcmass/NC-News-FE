@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { fetchTopics } from '../Api';
 
-const NavMenu = ({ newTopic, setNewTopic }) => {
+const NavMenu = ({ newTopic, setNewTopic, setClick }) => {
     const [topics, setTopics] = useState([])
     useEffect(() => {
       fetchTopics()
@@ -13,6 +13,7 @@ const NavMenu = ({ newTopic, setNewTopic }) => {
 
     const handleClick = (e) => {
       setNewTopic(e.target.value)
+      setClick(true)
     }
    
   
