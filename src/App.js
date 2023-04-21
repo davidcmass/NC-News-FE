@@ -6,7 +6,6 @@ import Home from "./components/Home";
 import Articles from "./components/Articles";
 import { fetchUser } from "./Api";
 import { useState, useEffect } from "react";
-import ArticleCards from "./components/ArticleCards";
 
 function App() {
   const [click, setClick] = useState(true);
@@ -22,7 +21,7 @@ function App() {
     return user.username;
   });
 
-  const [newTopic, setNewTopic] = useState("coding");
+  const [newTopic, setNewTopic] = useState();
 
   const scrollUp = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -34,7 +33,7 @@ function App() {
       {click ? "" : <NavMenu setNewTopic={setNewTopic} newTopic={newTopic} />}
       <Routes>
         <Route
-          path="/"
+          path="/Articles"
           element={<Home scrollUp={scrollUp} newTopic={newTopic} />}
         />
         <Route
@@ -47,10 +46,6 @@ function App() {
             )
           }
         />
-        {/* <Route
-          path="/Articles/:topic"
-          element={<ArticleCards setIsLoading={setIsLoading} />}
-        /> */}
       </Routes>
     </div>
   );

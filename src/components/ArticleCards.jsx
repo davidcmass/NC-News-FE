@@ -1,28 +1,21 @@
 import { useEffect, useState } from "react";
-import { fetchArticles, fetchArticleTopic } from '../Api'
+import { fetchArticles } from '../Api'
+import { useSearchParams } from "react-router-dom";
 
-const ArticleCards = ({ setIsLoading, newTopic }) => {
+const ArticleCards = ({ setIsLoading }) => {
     const [articles, setArticles] = useState([])
+    let [searchParams, setSearchParams] = useSearchParams();
+
+    const searchTopic = searchParams.get('topic')
+
       useEffect(() => {
         // setIsLoading(true)
-        
-        if (newTopic) {
-          fetchArticleTopic(newTopic)
-          .then((articles) => {
-            setArticles(articles)
-          }) 
-        } 
-        
-        fetchArticles()
+        fetchArticles(searchTopic)
         .then((articles) => {
           setArticles(articles)
       })
-      setIsLoading(false)
-    }, [newTopic, setIsLoading])
-
-
-      
-
+      // setIsLoading(false)
+    }, [searchTopic, setIsLoading])
 
     return <div className="articleContainer">
     {

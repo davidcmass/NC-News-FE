@@ -11,10 +11,10 @@ const Home = ({ scrollUp, newTopic }) => {
       <hr />
       <div className="banner flex flex-col justify-center items-center p-2">
       <img src={character} alt="Character" />
-      <h3 className='bannerText p-2 '>Check out our <span className='bannerLink'>{ newTopic ? newTopic : 'All Topics' }</span> articles today.</h3>
+      <h3 className='bannerText p-2 '>Check out our <span className='bannerLink'>{ newTopic ? newTopic : 'All topic' }</span> articles today.</h3>
       </div>
         <hr />
-          { isLoading ? <div className='loading'>Loading...</div> : <ArticleCards setIsLoading={setIsLoading} newTopic={newTopic} /> }
+          { isLoading ? <div className='loading'>Loading...</div> : <ArticleCards setIsLoading={setIsLoading} /> }
 
          <button><span className="material-symbols-outlined p-2 upArrow" onClick={scrollUp}>
         arrow_upward
