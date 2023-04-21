@@ -1,5 +1,5 @@
 import navLogo from '../*/Nav-Logo.svg'
-import { useEffect, useState, useContext } from "react";
+import { useState, useContext } from "react";
 import AuthContext from "../contexts/AuthProvider"
 
 const Nav = ({ click, setClick, userNames}) => {
@@ -38,7 +38,7 @@ const Nav = ({ click, setClick, userNames}) => {
          <a href="/" className='navLogo'><img src={navLogo} alt="Logo" /></a>
 
          { logSuccess ? <div className='flex justify-center items-center gap-5 border-b border-black logInSuccess'><h3>{auth}</h3> <button type='button' className="navButton" onClick={handleLogOut}>Log out</button></div> : <form className='flex justify-center border-b border-black username' onSubmit={handleSubmit}>
-            <input type="text" name="userInput" id="userInput" placeholder={ !err ? 'Enter your username' : 'Invalid Username!' }className='appearance-none bg-transparent border-none text-gray-700 py-1 px-2 focus:outline-none' autoComplete='off' onChange={(e) => setLogUser(e.target.value)} value={
+            <input type="text" name="userInput" id="userInput" placeholder={ !err ? 'Username' : 'Invalid Username!' } className=' w-28 appearance-none bg-transparent border-none text-gray-700 py-1 px-2 focus:outline-none' autoComplete='off' onChange={(e) => setLogUser(e.target.value)} value={
             logUser} required/>
         <button type='submit' className="navButton">Log in</button>
         </form> }
