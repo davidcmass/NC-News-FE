@@ -140,7 +140,7 @@ const Articles = ({ setIsLoading, scrollUp }) => {
       </span> </a>
       
       <img className='pb-2' src={articleId.article_img_url} alt="" />
-      <p className='description'>{articleId.body}</p>
+      <p className='description max-w-6xl'>{articleId.body}</p>
 
 
       <div className='p-5 flex gap-10'>
@@ -172,7 +172,7 @@ const Articles = ({ setIsLoading, scrollUp }) => {
         {commentsId.map((comments) => {
           return <div key={comments.comment_id} className="p-4 flex flex-col items-center gap-4 comments"> 
           <hr />
-            <h3>{comments.body}</h3>
+            <h3 className="max-w-6xl">{comments.body}</h3>
             <p className="author">{comments.author}</p>
             <div className="flex gap-1">
             <span className="material-symbols-outlined">

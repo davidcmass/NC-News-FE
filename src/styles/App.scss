@@ -57,6 +57,7 @@ $white_0: #ffffff;
       position: fixed;
       top: 3rem;
       background-color: $white_0;
+      width: 100%;
 
       .navTopics {
         &:hover {
@@ -90,9 +91,6 @@ $white_0: #ffffff;
         .bannerLink {
             color: $blue_0;
             text-decoration: underline;
-            &:hover {
-                color: $grey_0;
-            }
           }
     }
   }
@@ -218,7 +216,7 @@ input:focus {
 
 @media (min-width: 1000px) {
  
-  .articleContaoner {
+  .articleContainer {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

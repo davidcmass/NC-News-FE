@@ -1,24 +1,35 @@
 import { useEffect, useState } from "react";
-import { fetchArticles } from '../Api'
+import { fetchArticles, fetchArticleTopic } from '../Api'
 
-const ArticleCards = ({ setIsLoading }) => {
+const ArticleCards = ({ setIsLoading, newTopic }) => {
     const [articles, setArticles] = useState([])
       useEffect(() => {
-        setIsLoading(true)
+        // setIsLoading(true)
+        
+        if (newTopic) {
+          fetchArticleTopic(newTopic)
+          .then((articles) => {
+            setArticles(articles)
+          }) 
+        } 
+        
         fetchArticles()
         .then((articles) => {
           setArticles(articles)
       })
       setIsLoading(false)
-    }, [])
+    }, [newTopic, setIsLoading])
 
-  
-    return <div className="articleContaoner">
+
+      
+
+
+    return <div className="articleContainer">
     {
     articles.map((article) => {
       const aBody = article.body.substring(0, 120) + '...'
 
-      if (article.article_id < 10) {
+       
       return <div className={'articleCard flex flex-col p-5 text-left gap-1'} key={article.article_id}>
       <img className='pb-2' src={article.article_img_url} alt="image" />
         <p className='topic'>{article.topic}</p>
@@ -26,7 +37,7 @@ const ArticleCards = ({ setIsLoading }) => {
       <p className="description">{aBody}</p>
       <p className="author">By {article.author}</p>
       </div>
-      }
+      
     })
     }
    </div>

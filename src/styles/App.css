@@ -37,6 +37,7 @@
   position: fixed;
   top: 3rem;
   background-color: #ffffff;
+  width: 100%;
 }
 .navItems .navTopics:hover {
   text-decoration: underline;
@@ -66,9 +67,6 @@ hr {
 .home .bannerText .bannerLink {
   color: #0051a4;
   text-decoration: underline;
-}
-.home .bannerText .bannerLink:hover {
-  color: #333333;
 }
 
 .articleCard .articleTitle {
@@ -172,7 +170,7 @@ input:focus {
 }
 
 @media (min-width: 1000px) {
-  .articleContaoner {
+  .articleContainer {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
