@@ -33,7 +33,7 @@ function App() {
       {click ? "" : <NavMenu setNewTopic={setNewTopic} newTopic={newTopic} />}
       <Routes>
         <Route
-          path="/Articles"
+          path="/"
           element={<Home scrollUp={scrollUp} newTopic={newTopic} />}
         />
         <Route

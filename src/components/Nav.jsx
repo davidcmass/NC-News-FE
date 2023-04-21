@@ -35,7 +35,7 @@ const Nav = ({ click, setClick, userNames}) => {
        <button onClick={() => setClick(!click)}>{ click ? <span className="material-symbols-outlined"> menu
         </span> : <span className="material-symbols-outlined"> close
         </span> }</button> 
-         <a href="/Articles" className='navLogo'><img src={navLogo} alt="Logo" /></a>
+         <a href="/" className='navLogo'><img src={navLogo} alt="Logo" /></a>
 
          { logSuccess ? <div className='flex justify-center items-center gap-5 border-b border-black logInSuccess'><h3>{auth}</h3> <button type='button' className="navButton" onClick={handleLogOut}>Log out</button></div> : <form className='flex justify-center border-b border-black username' onSubmit={handleSubmit}>
             <input type="text" name="userInput" id="userInput" placeholder={ !err ? 'Username' : 'Invalid Username!' } className=' w-28 appearance-none bg-transparent border-none text-gray-700 py-1 px-2 focus:outline-none' autoComplete='off' onChange={(e) => setLogUser(e.target.value)} value={

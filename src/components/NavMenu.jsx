@@ -17,12 +17,12 @@ const NavMenu = ({ newTopic, setNewTopic }) => {
    
   
     return <ul className="navItems flex flex-col gap-4 p-5"> 
-    <Link value={undefined} onClick={handleClick} to="/Articles" className="navTopics">Home</Link>
+    <Link value={undefined} onClick={handleClick} to="/" className="navTopics">Home</Link>
     {
     topics.map((topic) => {
       const caps = topic.slug.charAt(0).toUpperCase() + topic.slug.slice(1)
   
-      return <Link to={`/Articles?topic=${topic.slug}`}> <button onClick={handleClick} value={topic.slug} key={topic.slug} className="navTopics text-left">{caps}</button> </Link>
+      return <Link to={`/?topic=${topic.slug}`}> <button onClick={handleClick} value={topic.slug} key={topic.slug} className="navTopics text-left">{caps}</button> </Link>
     })
     }
     <hr />
