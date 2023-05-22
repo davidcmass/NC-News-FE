@@ -2,6 +2,8 @@
 
 # Nc News Front-End
 
+Built with ❤️ by [DavidMass](https://github.com/davidcmass)
+
 [Website](https://nc-news-fe.vercel.app/)
 
 [Back-End](https://github.com/davidcmass/nc-news-be)
